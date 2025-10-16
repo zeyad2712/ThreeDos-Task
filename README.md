@@ -1,34 +1,45 @@
 # Smart Login System
 
-A fully responsive smart login system built with native HTML, CSS, and JavaScript. This system includes three main pages: Login, Signup, and Profile, with complete OTP verification functionality and JWT token management.
+A modern, fully responsive authentication system built with HTML5, CSS3, and JavaScript. Features a beautiful glass-morphism design with smooth animations, complete OTP verification, and JWT token management. The system includes three main pages: Login, Signup, and Profile with advanced UI/UX enhancements.
 
-## Features
+## ✨ Features
 
 ### 🔐 Authentication System
-- **Login Page**: Email/password authentication with remember me functionality
+- **Login Page**: Email/password authentication with forgot password functionality
 - **Signup Page**: User registration with email verification via OTP
-- **Profile Page**: User dashboard with account information and settings
-- **Forgot Password**: OTP-based password reset functionality
+- **Profile Page**: Enhanced user dashboard with account information and settings
+- **Forgot Password**: Complete OTP-based password reset flow
+- **Update Profile**: In-app profile editing with real-time updates
 
 ### 🛡️ Security Features
-- JWT token-based authentication
-- OTP verification for email confirmation
+- JWT token-based authentication (access_token & refresh_token)
+- OTP verification for email confirmation and password reset
 - Password strength validation
 - Secure token storage in localStorage
 - Input validation and sanitization
+- Protected routes with automatic redirects
+
+### 🎨 Modern UI/UX Design
+- **Glass-morphism Design**: Translucent cards with backdrop blur effects
+- **Smooth Animations**: Staggered loading, hover effects, and transitions
+- **Interactive Elements**: Ripple effects, pulse animations, and micro-interactions
+- **Gradient Backgrounds**: Beautiful color schemes and visual hierarchy
+- **Responsive Layout**: Mobile-first design with touch-friendly interfaces
 
 ### 📱 Responsive Design
 - Mobile-first responsive design
-- Bootstrap 5 framework
-- Modern UI with smooth animations
+- Bootstrap 5 framework with custom enhancements
 - Cross-browser compatibility
+- Touch-optimized interactions
+- Adaptive typography and spacing
 
 ### 🔧 Technical Features
-- AJAX API calls with error handling
+- AJAX API calls with comprehensive error handling
 - Form validation (client-side and server-side)
 - Loading states and user feedback
 - Auto-redirect based on authentication status
-- Global error handling
+- Global error handling with user-friendly messages
+- Intersection Observer for performance optimization
 
 ## Project Structure
 
@@ -49,14 +60,21 @@ ThreeDos Task/
 
 The system integrates with the following API endpoints:
 
-- `POST /auth/login` - User login
-- `POST /auth/signup` - User registration
-- `POST /auth/forgot-password` - Send OTP for password reset
-- `POST /auth/verify-otp` - Verify OTP for password reset
-- `POST /auth/verify-signup-otp` - Verify OTP for signup
-- `POST /auth/resend-otp` - Resend OTP
-- `POST /auth/change-password` - Change user password
-- `GET /auth/profile` - Get user profile information
+### Authentication
+- `POST /auth/login` - User login (returns access_token & refresh_token)
+- `POST /auth/signup/` - User registration
+- `POST /auth/confirm-email/` - Verify OTP for signup
+- `POST /auth/resend-otp/` - Resend OTP for signup
+
+### Password Management
+- `PATCH /auth/forgot-password` - Send OTP for password reset
+- `PATCH /auth/verify-forget-code` - Verify OTP for password reset
+- `PATCH /auth/reset-password` - Reset password with OTP
+
+### User Management
+- `GET /users` - Get user profile information
+- `PATCH /users/` - Update user profile (name)
+- `POST /users/logout` - User logout
 
 ## Getting Started
 
@@ -79,10 +97,11 @@ The system integrates with the following API endpoints:
 ### Usage
 
 #### Login Flow
-1. Navigate to the login page
+1. Navigate to the login page (`pages/index.html`)
 2. Enter your email and password
 3. Click "Sign In" to authenticate
 4. Upon successful login, you'll be redirected to the profile page
+5. Tokens are automatically stored in localStorage
 
 #### Signup Flow
 1. Click "Sign up" link on the login page
@@ -91,6 +110,8 @@ The system integrates with the following API endpoints:
    - Email Address
    - Password (minimum 8 characters)
    - Confirm Password
+   - Phone Number
+   - Gender
 3. Accept terms and conditions
 4. Click "Create Account"
 5. Verify your email with the OTP sent to your inbox
@@ -98,24 +119,27 @@ The system integrates with the following API endpoints:
 
 #### Forgot Password Flow
 1. On the login page, click "Forgot your password?"
-2. Enter your email address
+2. Enter your email address and click "Send OTP"
 3. Check your email for the OTP code
-4. Enter the 6-digit OTP code
-5. Upon verification, you can reset your password
+4. Enter the 6-digit OTP code and click "Verify OTP"
+5. Upon verification, set your new password
+6. Click "Reset Password" to complete the process
 
 #### Profile Management
-1. View your account information
-2. Change your password using the "Change Password" button
-3. Logout when finished
+1. View your enhanced account information with beautiful animations
+2. Update your profile name using the "Update Profile" button
+3. View security information and account statistics
+4. Logout when finished
 
 ## Technologies Used
 
 - **HTML5**: Semantic markup and form elements
-- **CSS3**: Custom styling with CSS variables and animations
-- **JavaScript (ES6+)**: Modern JavaScript with async/await
-- **Bootstrap 5**: Responsive framework and components
-- **Font Awesome**: Icons and visual elements
-- **jQuery**: DOM manipulation and event handling
+- **CSS3**: Advanced styling with CSS custom properties, glass-morphism effects, and smooth animations
+- **JavaScript (ES6+)**: Modern JavaScript with async/await, Intersection Observer API
+- **Bootstrap 5**: Responsive framework with custom enhancements
+- **Font Awesome**: Comprehensive icon library for visual elements
+- **jQuery**: DOM manipulation, AJAX calls, and event handling
+- **CSS Animations**: Keyframe animations, transitions, and micro-interactions
 
 ## Browser Support
 
@@ -168,22 +192,39 @@ The system includes comprehensive error handling:
 
 ## Performance Features
 
-- Lazy loading of page components
-- Efficient DOM manipulation
-- Optimized API calls
-- Responsive image handling
-- Smooth animations and transitions
+- **Optimized Animations**: Hardware-accelerated CSS transforms and transitions
+- **Efficient DOM Manipulation**: jQuery-based with minimal reflows
+- **Lazy Loading**: Intersection Observer for performance optimization
+- **Responsive Design**: Mobile-first approach with touch optimization
+- **Smooth Transitions**: Cubic-bezier easing functions for natural motion
+- **Memory Management**: Proper cleanup of event listeners and animations
+
+## UI/UX Enhancements
+
+### Visual Design
+- **Glass-morphism Effects**: Translucent cards with backdrop blur
+- **Gradient Backgrounds**: Beautiful color schemes and visual hierarchy
+- **Interactive Animations**: Hover effects, ripple animations, and micro-interactions
+- **Responsive Typography**: Adaptive font sizes and spacing
+- **Modern Icons**: Font Awesome integration with contextual icons
+
+### User Experience
+- **Loading States**: Visual feedback during API calls
+- **Error Handling**: User-friendly error messages and recovery
+- **Form Validation**: Real-time validation with visual feedback
+- **Accessibility**: Enhanced focus states and keyboard navigation
+- **Mobile Optimization**: Touch-friendly interfaces and gestures
 
 ## Future Enhancements
 
 Potential improvements for the system:
-- Two-factor authentication (2FA)
-- Social media login integration
-- Password strength meter
-- Account lockout after failed attempts
-- Email templates customization
-- Multi-language support
-- Dark mode theme
+- **Two-factor authentication (2FA)**: Additional security layer
+- **Social media login integration**: OAuth providers
+- **Password strength meter**: Real-time password validation
+- **Account lockout**: Security after failed attempts
+- **Email templates**: Customizable notification emails
+- **Multi-language support**: Internationalization
+- **Progressive Web App**: Offline functionality and app-like experience
 
 ## Support
 
