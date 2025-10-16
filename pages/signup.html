@@ -357,7 +357,7 @@
                 // Send OTP verification request
                 $.ajax({
                     url: API_BASE_URL + '/auth/confirm-email',
-                    type: 'POST',
+                    type: 'PATCH',
                     contentType: 'application/json',
                     data: JSON.stringify({
                         email: $('#otpEmail').text(),
@@ -392,7 +392,7 @@
 
                 $.ajax({
                     url: API_BASE_URL + '/auth/resend-otp',
-                    type: 'POST',
+                    type: 'PATCH',
                     contentType: 'application/json',
                     data: JSON.stringify({
                         email: email

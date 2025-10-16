@@ -55,23 +55,23 @@
                     <div class="card-body text-center py-5 position-relative">
                         <!-- Animated background pattern -->
                         <div class="profile-bg-pattern"></div>
-                        
+
                         <div class="profile-avatar mb-4">
                             <div class="avatar-container">
                                 <i class="fas fa-user-circle fa-5x text-primary"></i>
                                 <div class="avatar-ring"></div>
                             </div>
                         </div>
-                        
+
                         <h2 class="fw-bold mb-2 profile-name" id="profileName">Loading...</h2>
                         <p class="text-muted mb-3 profile-email" id="profileEmail">Loading...</p>
-                        
+
                         <div class="profile-status-container">
                             <span class="badge bg-success profile-status" id="profileStatus">
                                 <i class="fas fa-check-circle me-1"></i>Verified
                             </span>
                         </div>
-                        
+
                         <!-- Profile stats -->
                         <div class="row mt-4 profile-stats">
                             <div class="col-4">
@@ -237,11 +237,12 @@
                             <div class="col-md-4">
                                 <div class="security-item enhanced">
                                     <div class="security-icon-container">
-                                        <i class="fas fa-envelope-check security-icon"></i>
+                                        <i class="fas fa-envelope security-icon"></i>
                                         <div class="security-pulse"></div>
                                     </div>
                                     <h6 class="fw-bold security-title">Email Verified</h6>
-                                    <p class="text-muted small security-description">Your email is verified and secure</p>
+                                    <p class="text-muted small security-description">Your email is verified and secure
+                                    </p>
                                     <div class="security-status">
                                         <span class="badge bg-success">Active</span>
                                     </div>
@@ -254,7 +255,8 @@
                                         <div class="security-pulse"></div>
                                     </div>
                                     <h6 class="fw-bold security-title">Secure Password</h6>
-                                    <p class="text-muted small security-description">Strong password protection enabled</p>
+                                    <p class="text-muted small security-description">Strong password protection enabled
+                                    </p>
                                     <div class="security-status">
                                         <span class="badge bg-primary">Protected</span>
                                     </div>
@@ -263,11 +265,12 @@
                             <div class="col-md-4">
                                 <div class="security-item enhanced">
                                     <div class="security-icon-container">
-                                        <i class="fas fa-shield-check security-icon"></i>
+                                        <i class="fas fa-shield security-icon"></i>
                                         <div class="security-pulse"></div>
                                     </div>
                                     <h6 class="fw-bold security-title">Account Protected</h6>
-                                    <p class="text-muted small security-description">Advanced security features active</p>
+                                    <p class="text-muted small security-description">Advanced security features active
+                                    </p>
                                     <div class="security-status">
                                         <span class="badge bg-info">Secure</span>
                                     </div>
@@ -376,10 +379,15 @@
                     const userData = JSON.parse(storedUser);
                     displayUserData(userData);
                 } catch (e) {
-                    console.log('Error parsing stored user data:', e);
+                    showDefaultData();
                 }
             } else {
-                console.log('No stored user data found in localStorage');
+                // Show default data after a delay if API call fails
+                setTimeout(() => {
+                    if ($('#profileName').text() === 'Loading...') {
+                        showDefaultData();
+                    }
+                }, 5000);
             }
 
             // Logout functionality
@@ -458,40 +466,69 @@
                 });
             });
 
-            // Function to load user profile
+            // Load user profile
             function loadUserProfile() {
-
+                
                 $.ajax({
                     url: API_BASE_URL + '/users',
                     type: 'GET',
                     headers: {
                         'Authorization': 'Bearer ' + authToken,
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'ngrok-skip-browser-warning': 'true'
                     },
                     success: function (response) {
-                        console.log('Profile data received:', response);
-                        // Display user data
-                        displayUserData(response);
+                        
+                        let userData = response;
+                        if (response.user) userData = response.user;
+                        if (response.data) userData = response.data;
+
+                        displayUserData(userData);
+                        localStorage.setItem('currentUser', JSON.stringify(userData));
                     },
                     error: function (xhr, status, error) {
-                        console.log('Profile load error:', xhr.status, error);
-                        console.log('Response:', xhr.responseText);
-
+                        console.error('Profile load error:', {
+                            status: xhr.status,
+                            statusText: xhr.statusText,
+                            responseText: xhr.responseText,
+                            error: error
+                        });
+                        
                         if (xhr.status === 401) {
                             // Token expired or invalid
                             localStorage.removeItem('authToken');
                             localStorage.removeItem('refreshToken');
                             localStorage.removeItem('currentUser');
+                            alert('Session expired. Please login again.');
                             window.location.href = 'index.html';
                         } else {
-                            alert('Failed to load profile data. Please try again.');
+                            alert('Failed to load profile. Please try again later.');
                         }
                     }
                 });
             }
 
+            // Function to show default/placeholder data
+            function showDefaultData() {
+                const defaultData = {
+                    fullName: 'User',
+                    email: 'user@example.com',
+                    phone: 'Not provided',
+                    gender: 'Not specified',
+                    createdAt: new Date().toISOString(),
+                    lastLogin: new Date().toISOString()
+                };
+                displayUserData(defaultData);
+            }
+
             // Function to display user data
             function displayUserData(userData) {
+                
+                if (!userData) {
+                    console.error('No user data provided to displayUserData');
+                    return;
+                }
+
                 // Update profile header - handle different name formats
                 let displayName = 'User';
                 if (userData.fullName) {
@@ -507,11 +544,11 @@
                 const displayEmail = userData.email || 'No email';
 
                 // Animate profile name and email
-                $('#profileName').fadeOut(300, function() {
+                $('#profileName').fadeOut(300, function () {
                     $(this).text(displayName).fadeIn(300);
                 });
-                
-                $('#profileEmail').fadeOut(300, function() {
+
+                $('#profileEmail').fadeOut(300, function () {
                     $(this).text(displayEmail).fadeIn(300);
                 });
 
@@ -538,7 +575,7 @@
                     }
 
                     // Animate info items
-                    $('.info-item').each(function(index) {
+                    $('.info-item').each(function (index) {
                         $(this).css('opacity', '0').delay(index * 100).animate({
                             opacity: 1
                         }, 500);
@@ -547,35 +584,35 @@
             }
 
             // Add interactive effects
-            $(document).ready(function() {
+            $(document).ready(function () {
                 // Add hover effects to cards
                 $('.card').hover(
-                    function() {
+                    function () {
                         $(this).addClass('shadow-lg');
                     },
-                    function() {
+                    function () {
                         $(this).removeClass('shadow-lg');
                     }
                 );
 
                 // Add click ripple effect to buttons
-                $('.btn').on('click', function(e) {
+                $('.btn').on('click', function (e) {
                     const $btn = $(this);
                     const $ripple = $('<span class="ripple"></span>');
                     const rect = this.getBoundingClientRect();
                     const size = Math.max(rect.width, rect.height);
                     const x = e.clientX - rect.left - size / 2;
                     const y = e.clientY - rect.top - size / 2;
-                    
+
                     $ripple.css({
                         width: size,
                         height: size,
                         left: x,
                         top: y
                     });
-                    
+
                     $btn.append($ripple);
-                    
+
                     setTimeout(() => {
                         $ripple.remove();
                     }, 600);
@@ -597,19 +634,19 @@
 
                 // Animate stats on scroll
                 function animateStats() {
-                    $('.stat-number').each(function() {
+                    $('.stat-number').each(function () {
                         const $this = $(this);
                         const countTo = $this.attr('data-count');
-                        
+
                         $({ countNum: $this.text() }).animate({
                             countNum: countTo
                         }, {
                             duration: 2000,
                             easing: 'swing',
-                            step: function() {
+                            step: function () {
                                 $this.text(Math.floor(this.countNum));
                             },
-                            complete: function() {
+                            complete: function () {
                                 $this.text(this.countNum);
                             }
                         });
@@ -626,7 +663,7 @@
                     });
                 });
 
-                $('.profile-stats').each(function() {
+                $('.profile-stats').each(function () {
                     observer.observe(this);
                 });
             });
