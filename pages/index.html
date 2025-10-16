@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Smart Login System</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="container-fluid vh-100">
+        <div class="row h-100">
+            <!-- Left Side - Login Form -->
+            <div class="col-lg-6 d-flex align-items-center justify-content-center bg-white">
+                <div class="login-form-container w-100 px-4 fade-in" style="max-width: 450px;">
+                    <div class="text-center mb-5">
+                        <div class="mb-3">
+                            <i class="fas fa-sign-in-alt fa-3x text-primary"></i>
+                        </div>
+                        <h2 class="fw-bold text-primary mb-2">Welcome Back</h2>
+                        <p class="text-muted mb-0">Sign in to your account to continue</p>
+                    </div>
+
+                    <form id="loginForm" class="needs-validation" novalidate>
+                        <!-- Login Section -->
+                        <div class="form-section mb-4">
+                            <h6 class="section-title text-primary mb-3">
+                                <i class="fas fa-user-circle me-2"></i>Login Credentials
+                            </h6>
+
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                    <input type="email" class="form-control" id="email" name="email"
+                                        placeholder="Enter your email address" required>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid email address.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                    <input type="password" class="form-control" id="password" name="password"
+                                        placeholder="Enter your password" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <div class="invalid-feedback">
+                                        Please provide a password.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="rememberMe">
+                                    <label class="form-check-label" for="rememberMe">
+                                        Remember me
+                                    </label>
+                                </div>
+                                <a href="#" class="text-primary text-decoration-none fw-bold" id="forgotPasswordLink">
+                                    Forgot password?
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid mb-4">
+                            <button type="submit" class="btn btn-primary btn-lg py-3" id="loginBtn">
+                                <span class="spinner-border spinner-border-sm d-none" role="status"
+                                    aria-hidden="true"></span>
+                                <i class="fas fa-sign-in-alt me-2"></i>
+                                Sign In
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="text-center mt-4">
+                        <p class="text-muted">Don't have an account? <a href="signup.html"
+                                class="text-decoration-none fw-bold">Sign up</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side - Image/Content -->
+            <div class="col-lg-6 d-none d-lg-flex align-items-center justify-content-center bg-gradient-primary">
+                <div class="text-center text-white slide-in-right">
+                    <i class="fas fa-shield-alt fa-5x mb-4"></i>
+                    <h3 class="fw-bold">Secure Login System</h3>
+                    <p class="lead">Your data is protected with industry-standard security</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="forgotPasswordModalLabel">Reset Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="forgotPasswordForm">
+                        <div class="mb-3">
+                            <label for="resetEmail" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="resetEmail" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary" id="sendOtpBtn">
+                                <span class="spinner-border spinner-border-sm d-none" role="status"
+                                    aria-hidden="true"></span>
+                                Send OTP
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- OTP Verification Form (hidden initially) -->
+                    <form id="otpVerificationForm" class="d-none">
+                        <div class="mb-3">
+                            <label for="otpCode" class="form-label">Enter OTP Code</label>
+                            <input type="text" class="form-control" id="otpCode" maxlength="6" required>
+                            <div class="form-text">Enter the 6-digit code sent to your email</div>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success" id="verifyOtpBtn">
+                                <span class="spinner-border spinner-border-sm d-none" role="status"
+                                    aria-hidden="true"></span>
+                                Verify OTP
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+            // API Configuration
+            const API_BASE_URL = 'https://thetically-impressible-arla.ngrok-free.dev';
+
+            // Password visibility toggle
+            $('#togglePassword').click(function () {
+                const passwordField = $('#password');
+                const icon = $(this).find('i');
+
+                if (passwordField.attr('type') === 'password') {
+                    passwordField.attr('type', 'text');
+                    icon.removeClass('fa-eye').addClass('fa-eye-slash');
+                } else {
+                    passwordField.attr('type', 'password');
+                    icon.removeClass('fa-eye-slash').addClass('fa-eye');
+                }
+            });
+
+            // Login form submission
+            $('#loginForm').on('submit', function (e) {
+                e.preventDefault();
+
+                const form = this;
+                if (!form.checkValidity()) {
+                    e.stopPropagation();
+                    form.classList.add('was-validated');
+                    return;
+                }
+
+                // Prepare login data
+                const loginData = {
+                    email: $('#email').val(),
+                    password: $('#password').val()
+                };
+
+                // Show loading state
+                const loginBtn = $('#loginBtn');
+                const spinner = loginBtn.find('.spinner-border');
+                const icon = loginBtn.find('i');
+
+                loginBtn.prop('disabled', true);
+                spinner.removeClass('d-none');
+                icon.addClass('d-none');
+
+                // Send login request
+                $.ajax({
+                    url: API_BASE_URL + '/auth/login',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(loginData),
+                    success: function (response) {
+                        // Store access token and refresh token
+                        if (response.access_Token) {
+                            localStorage.setItem('authToken', response.access_Token);
+                        }
+                        if (response.refresh_Token) {
+                            localStorage.setItem('refreshToken', response.refresh_Token);
+                        }
+                        if (response.user) {
+                            localStorage.setItem('currentUser', JSON.stringify(response.user));
+                        }
+
+                        // Redirect to profile page
+                        window.location.href = 'profile.html';
+                    },
+                    error: function (xhr, status, error) {
+                        let errorMessage = 'Invalid email or password. Please try again.';
+
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            errorMessage = xhr.responseJSON.message;
+                        } else if (xhr.responseJSON && xhr.responseJSON.error) {
+                            errorMessage = xhr.responseJSON.error;
+                        }
+
+                        alert('Login Error: ' + errorMessage);
+                    },
+                    complete: function () {
+                        // Reset button state
+                        loginBtn.prop('disabled', false);
+                        spinner.addClass('d-none');
+                        icon.removeClass('d-none');
+                    }
+                });
+            });
+
+            // Forgot password link click
+            $('#forgotPasswordLink').click(function (e) {
+                e.preventDefault();
+                $('#forgotPasswordModal').modal('show');
+            });
+
+            // Forgot password form submission
+            $('#forgotPasswordForm').on('submit', function (e) {
+                e.preventDefault();
+
+                const email = $('#resetEmail').val();
+
+                if (!email) {
+                    alert('Please enter your email address.');
+                    return;
+                }
+
+                // Show loading state
+                const sendOtpBtn = $('#sendOtpBtn');
+                const spinner = sendOtpBtn.find('.spinner-border');
+
+                sendOtpBtn.prop('disabled', true);
+                spinner.removeClass('d-none');
+
+                // Send forgot password request
+                console.log('Sending forgot password request:', {
+                    email: email,
+                    url: API_BASE_URL + '/auth/forgot-password'
+                });
+
+                $.ajax({
+                    url: API_BASE_URL + '/auth/forgot-password/',
+                    type: 'PATCH',
+                    headers: {
+                        'Authorization': 'Bearer ' + authToken,
+                        'Content-Type': 'application/json'
+                    },
+                    data: JSON.stringify({
+                        email: email
+                    }),
+                    success: function (response) {
+                        console.log('Forgot password success:', response);
+                        // Hide forgot password form and show OTP form
+                        $('#forgotPasswordForm').addClass('d-none');
+                        $('#otpVerificationForm').removeClass('d-none');
+
+                        // Store email for later use
+                        $('#otpVerificationForm').data('email', email);
+                        localStorage.setItem('resetEmail', email);
+
+                        alert('Verification code sent to your email address.');
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Forgot password error:', xhr.status, error);
+                        console.log('Response:', xhr.responseText);
+
+                        let errorMessage = 'Failed to send verification code. Please try again.';
+
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            errorMessage = xhr.responseJSON.message;
+                        } else if (xhr.responseJSON && xhr.responseJSON.error) {
+                            errorMessage = xhr.responseJSON.error;
+                        }
+
+                        alert('Error: ' + errorMessage);
+                    },
+                    complete: function () {
+                        sendOtpBtn.prop('disabled', false);
+                        spinner.addClass('d-none');
+                    }
+                });
+            });
+
+            // OTP verification form submission
+            $('#otpVerificationForm').on('submit', function (e) {
+                e.preventDefault();
+
+                const otpCode = $('#otpCode').val();
+                const email = $(this).data('email');
+
+                if (otpCode.length !== 6) {
+                    alert('Please enter a valid 6-digit verification code.');
+                    return;
+                }
+
+                // Show loading state
+                const verifyOtpBtn = $('#verifyOtpBtn');
+                const spinner = verifyOtpBtn.find('.spinner-border');
+
+                verifyOtpBtn.prop('disabled', true);
+                spinner.removeClass('d-none');
+
+                // Send OTP verification request
+                $.ajax({
+                    url: API_BASE_URL + '/auth/verify-forget-code',
+                    type: 'PATCH',
+                    contentType: 'application/json',
+                    processData: false,
+                    data: JSON.stringify({
+                        email: email,
+                        otp: otpCode
+                    }),
+                    headers: {
+                        'ngrok-skip-browser-warning': 'true'
+                    },
+                    success: function (response) {
+                        // Store OTP for password reset
+                        localStorage.setItem('resetOtp', otpCode);
+
+                        // Show password reset form
+                        showPasswordResetForm(email);
+                    },
+                    error: function (xhr, status, error) {
+                        let errorMessage = 'Invalid verification code. Please try again.';
+
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            errorMessage = xhr.responseJSON.message;
+                        }
+
+                        alert('Error: ' + errorMessage);
+                    },
+                    complete: function () {
+                        verifyOtpBtn.prop('disabled', false);
+                        spinner.addClass('d-none');
+                    }
+                });
+            });
+
+            // Function to show password reset form
+            function showPasswordResetForm(email) {
+                const modalBody = $('#forgotPasswordModal .modal-body');
+                modalBody.html(`
+                    <form id="resetPasswordForm">
+                        <div class="mb-3">
+                            <label for="newPassword" class="form-label">New Password</label>
+                            <input type="password" class="form-control" id="newPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmNewPassword" class="form-label">Confirm New Password</label>
+                            <input type="password" class="form-control" id="confirmNewPassword" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success" id="resetPasswordBtn">
+                                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                Reset Password
+                            </button>
+                        </div>
+                    </form>
+                `);
+
+                $('#resetPasswordForm').on('submit', function (e) {
+                    e.preventDefault();
+
+                    const newPassword = $('#newPassword').val();
+                    const confirmPassword = $('#confirmNewPassword').val();
+                    const email = localStorage.getItem('resetEmail');
+                    const authToken = localStorage.getItem('resetToken');
+                    const resetOtp = localStorage.getItem('resetOtp');
+
+
+                    if (newPassword !== confirmPassword) {
+                        alert('Passwords do not match.');
+                        return;
+                    }
+
+                    if (newPassword.length < 8) {
+                        alert('Password must be at least 8 characters long.');
+                        return;
+                    }
+
+                    const resetPasswordBtn = $('#resetPasswordBtn');
+                    const spinner = resetPasswordBtn.find('.spinner-border');
+
+                    resetPasswordBtn.prop('disabled', true);
+                    spinner.removeClass('d-none');
+
+
+                    $.ajax({
+                        url: API_BASE_URL + '/auth/reset-password',
+                        type: 'PATCH',
+                        headers: {
+                            'Authorization': 'Bearer ' + authToken,
+                            'Content-Type': 'application/json'
+                        },
+                        data: JSON.stringify({
+                            email: email,
+                            otp: resetOtp,
+                            password: newPassword,
+                            confirmPassword: confirmPassword
+                        }),
+                        success: function (response) {
+                            alert('Password reset successfully! Please login with your new password.');
+                            $('#forgotPasswordModal').modal('hide');
+                            localStorage.removeItem('resetToken');
+                            localStorage.removeItem('resetEmail');
+                            localStorage.removeItem('resetOtp');
+                            resetModalContent();
+                        },
+                        error: function (xhr) {
+                            let errorMessage = 'Failed to reset password. Please try again.';
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                errorMessage = xhr.responseJSON.message;
+                            }
+                            alert('Error: ' + errorMessage);
+                        },
+                        complete: function () {
+                            resetPasswordBtn.prop('disabled', false);
+                            spinner.addClass('d-none');
+                        }
+                    });
+
+                });
+
+
+            }
+
+            // Function to reset modal content
+            function resetModalContent() {
+                const modalBody = $('#forgotPasswordModal .modal-body');
+                modalBody.html(`
+                    <form id="forgotPasswordForm">
+                        <div class="mb-3">
+                            <label for="resetEmail" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="resetEmail" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary" id="sendOtpBtn">
+                                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                Send OTP
+                            </button>
+                        </div>
+                    </form>
+                    <form id="otpVerificationForm" class="d-none">
+                        <div class="mb-3">
+                            <label for="otpCode" class="form-label">Enter OTP Code</label>
+                            <input type="text" class="form-control" id="otpCode" maxlength="6" required>
+                            <div class="form-text">Enter the 6-digit code sent to your email</div>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success" id="verifyOtpBtn">
+                                <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                Verify OTP
+                            </button>
+                        </div>
+                    </form>
+                `);
+            }
+
+            // Reset modal when closed
+            $('#forgotPasswordModal').on('hidden.bs.modal', function () {
+                resetModalContent();
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Smart Login System</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="fas fa-shield-alt me-2"></i>Smart Login System
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt me-1"></i>Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <!-- Profile Header -->
+                <div class="card shadow-sm mb-4 profile-header-card">
+                    <div class="card-body text-center py-5 position-relative">
+                        <!-- Animated background pattern -->
+                        <div class="profile-bg-pattern"></div>
+                        
+                        <div class="profile-avatar mb-4">
+                            <div class="avatar-container">
+                                <i class="fas fa-user-circle fa-5x text-primary"></i>
+                                <div class="avatar-ring"></div>
+                            </div>
+                        </div>
+                        
+                        <h2 class="fw-bold mb-2 profile-name" id="profileName">Loading...</h2>
+                        <p class="text-muted mb-3 profile-email" id="profileEmail">Loading...</p>
+                        
+                        <div class="profile-status-container">
+                            <span class="badge bg-success profile-status" id="profileStatus">
+                                <i class="fas fa-check-circle me-1"></i>Verified
+                            </span>
+                        </div>
+                        
+                        <!-- Profile stats -->
+                        <div class="row mt-4 profile-stats">
+                            <div class="col-4">
+                                <div class="stat-item">
+                                    <div class="stat-number">100%</div>
+                                    <div class="stat-label">Complete</div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="stat-item">
+                                    <div class="stat-number">24/7</div>
+                                    <div class="stat-label">Secure</div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="stat-item">
+                                    <div class="stat-number">∞</div>
+                                    <div class="stat-label">Protected</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Information -->
+                <div class="card shadow-sm mb-4 profile-info-card">
+                    <div class="card-header bg-gradient-primary text-white">
+                        <h5 class="mb-0 fw-bold d-flex align-items-center">
+                            <i class="fas fa-user me-2"></i>Profile Information
+                            <span class="badge bg-white text-primary ms-auto">Personal</span>
+                        </h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <label class="form-label fw-bold text-primary">
+                                        <i class="fas fa-user me-2"></i>Full Name
+                                    </label>
+                                    <div class="input-group info-input-group">
+                                        <span class="input-group-text bg-primary text-white">
+                                            <i class="fas fa-user"></i>
+                                        </span>
+                                        <input type="text" class="form-control info-input" id="displayName" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <label class="form-label fw-bold text-primary">
+                                        <i class="fas fa-envelope me-2"></i>Email Address
+                                    </label>
+                                    <div class="input-group info-input-group">
+                                        <span class="input-group-text bg-primary text-white">
+                                            <i class="fas fa-envelope"></i>
+                                        </span>
+                                        <input type="email" class="form-control info-input" id="displayEmail" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <label class="form-label fw-bold text-primary">
+                                        <i class="fas fa-phone me-2"></i>Phone Number
+                                    </label>
+                                    <div class="input-group info-input-group">
+                                        <span class="input-group-text bg-primary text-white">
+                                            <i class="fas fa-phone"></i>
+                                        </span>
+                                        <input type="tel" class="form-control info-input" id="displayPhone" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <label class="form-label fw-bold text-primary">
+                                        <i class="fas fa-venus-mars me-2"></i>Gender
+                                    </label>
+                                    <div class="input-group info-input-group">
+                                        <span class="input-group-text bg-primary text-white">
+                                            <i class="fas fa-venus-mars"></i>
+                                        </span>
+                                        <input type="text" class="form-control info-input" id="displayGender" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <label class="form-label fw-bold text-primary">
+                                        <i class="fas fa-calendar me-2"></i>Account Created
+                                    </label>
+                                    <div class="input-group info-input-group">
+                                        <span class="input-group-text bg-primary text-white">
+                                            <i class="fas fa-calendar"></i>
+                                        </span>
+                                        <input type="text" class="form-control info-input" id="accountCreated" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <label class="form-label fw-bold text-primary">
+                                        <i class="fas fa-clock me-2"></i>Last Login
+                                    </label>
+                                    <div class="input-group info-input-group">
+                                        <span class="input-group-text bg-primary text-white">
+                                            <i class="fas fa-clock"></i>
+                                        </span>
+                                        <input type="text" class="form-control info-input" id="lastLogin" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Actions -->
+                <div class="card shadow-sm mb-4 account-actions-card">
+                    <div class="card-header bg-gradient-warning text-white">
+                        <h5 class="mb-0 fw-bold d-flex align-items-center">
+                            <i class="fas fa-cog me-2"></i>Account Actions
+                            <span class="badge bg-white text-warning ms-auto">Settings</span>
+                        </h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <button class="btn btn-outline-primary w-100 action-btn" id="changePasswordBtn">
+                                    <div class="action-btn-content">
+                                        <i class="fas fa-key action-icon"></i>
+                                        <div class="action-text">
+                                            <div class="action-title">Change Password</div>
+                                            <div class="action-subtitle">Update your security</div>
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-outline-warning w-100 action-btn" id="updateProfileBtn">
+                                    <div class="action-btn-content">
+                                        <i class="fas fa-edit action-icon"></i>
+                                        <div class="action-text">
+                                            <div class="action-title">Update Profile</div>
+                                            <div class="action-subtitle">Edit your information</div>
+                                        </div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Information -->
+                <div class="card shadow-sm security-card">
+                    <div class="card-header bg-gradient-success text-white">
+                        <h5 class="mb-0 fw-bold d-flex align-items-center">
+                            <i class="fas fa-shield-alt me-2"></i>Security Information
+                            <span class="badge bg-white text-success ms-auto">Protected</span>
+                        </h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="security-item enhanced">
+                                    <div class="security-icon-container">
+                                        <i class="fas fa-envelope-check security-icon"></i>
+                                        <div class="security-pulse"></div>
+                                    </div>
+                                    <h6 class="fw-bold security-title">Email Verified</h6>
+                                    <p class="text-muted small security-description">Your email is verified and secure</p>
+                                    <div class="security-status">
+                                        <span class="badge bg-success">Active</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="security-item enhanced">
+                                    <div class="security-icon-container">
+                                        <i class="fas fa-lock security-icon"></i>
+                                        <div class="security-pulse"></div>
+                                    </div>
+                                    <h6 class="fw-bold security-title">Secure Password</h6>
+                                    <p class="text-muted small security-description">Strong password protection enabled</p>
+                                    <div class="security-status">
+                                        <span class="badge bg-primary">Protected</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="security-item enhanced">
+                                    <div class="security-icon-container">
+                                        <i class="fas fa-shield-check security-icon"></i>
+                                        <div class="security-pulse"></div>
+                                    </div>
+                                    <h6 class="fw-bold security-title">Account Protected</h6>
+                                    <p class="text-muted small security-description">Advanced security features active</p>
+                                    <div class="security-status">
+                                        <span class="badge bg-info">Secure</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="changePasswordForm">
+                        <div class="mb-3">
+                            <label for="currentPassword" class="form-label">Current Password</label>
+                            <input type="password" class="form-control" id="currentPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="newPassword" class="form-label">New Password</label>
+                            <input type="password" class="form-control" id="newPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmNewPassword" class="form-label">Confirm New Password</label>
+                            <input type="password" class="form-control" id="confirmNewPassword" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary" id="updatePasswordBtn">
+                                <span class="spinner-border spinner-border-sm d-none" role="status"
+                                    aria-hidden="true"></span>
+                                Update Password
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Profile Modal -->
+    <div class="modal fade" id="updateProfileModal" tabindex="-1" aria-labelledby="updateProfileModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateProfileModalLabel">Update Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="updateProfileForm">
+                        <div class="mb-3">
+                            <label for="updateNameInput" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="updateNameInput" required
+                                placeholder="Enter your full name">
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary" id="updateProfileSubmitBtn">
+                                <span class="spinner-border spinner-border-sm d-none" role="status"
+                                    aria-hidden="true"></span>
+                                Update Profile
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+            // API Configuration
+            const API_BASE_URL = 'https://thetically-impressible-arla.ngrok-free.dev';
+
+            // Check if user is logged in
+            const authToken = localStorage.getItem('authToken');
+            if (!authToken) {
+                // Redirect to login if no token
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Load user profile data
+            loadUserProfile();
+
+            // Also try to load from localStorage as fallback
+            const storedUser = localStorage.getItem('currentUser');
+            if (storedUser) {
+                try {
+                    const userData = JSON.parse(storedUser);
+                    displayUserData(userData);
+                } catch (e) {
+                    console.log('Error parsing stored user data:', e);
+                }
+            } else {
+                console.log('No stored user data found in localStorage');
+            }
+
+            // Logout functionality
+            $('#logoutBtn').click(function (e) {
+                e.preventDefault();
+                logout();
+            });
+
+            // Change password button
+            $('#changePasswordBtn').click(function () {
+                // For now, just show an alert - you can implement edit functionality later
+                alert('Change password functionality will be implemented soon!');
+            });
+
+            // Update profile button
+            $('#updateProfileBtn').click(function () {
+                // Get current name from the display field
+                const currentName = $('#displayName').val();
+                $('#updateNameInput').val(currentName);
+                $('#updateProfileModal').modal('show');
+            });
+
+            // Update profile form submission
+            $('#updateProfileForm').on('submit', function (e) {
+                e.preventDefault();
+
+                const newName = $('#updateNameInput').val().trim();
+
+                if (!newName) {
+                    alert('Please enter a valid name.');
+                    return;
+                }
+
+                // Show loading state
+                const updateBtn = $('#updateProfileSubmitBtn');
+                const spinner = updateBtn.find('.spinner-border');
+
+                updateBtn.prop('disabled', true);
+                spinner.removeClass('d-none');
+
+                // Send update request
+                $.ajax({
+                    url: API_BASE_URL + '/users/',
+                    type: 'PATCH',
+                    headers: {
+                        'Authorization': 'Bearer ' + authToken,
+                        'Content-Type': 'application/json'
+                    },
+                    data: JSON.stringify({
+                        fullName: newName
+                    }),
+                    success: function (response) {
+                        alert('Profile updated successfully!');
+                        $('#updateProfileModal').modal('hide');
+
+                        // Update the display with new name
+                        $('#profileName').text(newName);
+                        $('#displayName').val(newName);
+
+                        // Reset form
+                        $('#updateProfileForm')[0].reset();
+                    },
+                    error: function (xhr, status, error) {
+                        let errorMessage = 'Failed to update profile. Please try again.';
+
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            errorMessage = xhr.responseJSON.message;
+                        }
+
+                        alert('Error: ' + errorMessage);
+                    },
+                    complete: function () {
+                        updateBtn.prop('disabled', false);
+                        spinner.addClass('d-none');
+                    }
+                });
+            });
+
+            // Function to load user profile
+            function loadUserProfile() {
+
+                $.ajax({
+                    url: API_BASE_URL + '/users',
+                    type: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + authToken,
+                        'Content-Type': 'application/json'
+                    },
+                    success: function (response) {
+                        console.log('Profile data received:', response);
+                        // Display user data
+                        displayUserData(response);
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Profile load error:', xhr.status, error);
+                        console.log('Response:', xhr.responseText);
+
+                        if (xhr.status === 401) {
+                            // Token expired or invalid
+                            localStorage.removeItem('authToken');
+                            localStorage.removeItem('refreshToken');
+                            localStorage.removeItem('currentUser');
+                            window.location.href = 'index.html';
+                        } else {
+                            alert('Failed to load profile data. Please try again.');
+                        }
+                    }
+                });
+            }
+
+            // Function to display user data
+            function displayUserData(userData) {
+                // Update profile header - handle different name formats
+                let displayName = 'User';
+                if (userData.fullName) {
+                    displayName = userData.fullName;
+                } else if (userData.name) {
+                    displayName = userData.name;
+                } else if (userData.firstName && userData.lastName) {
+                    displayName = userData.firstName + ' ' + userData.lastName;
+                } else if (userData.firstName) {
+                    displayName = userData.firstName;
+                }
+
+                const displayEmail = userData.email || 'No email';
+
+                // Animate profile name and email
+                $('#profileName').fadeOut(300, function() {
+                    $(this).text(displayName).fadeIn(300);
+                });
+                
+                $('#profileEmail').fadeOut(300, function() {
+                    $(this).text(displayEmail).fadeIn(300);
+                });
+
+                // Update profile information fields with animation
+                setTimeout(() => {
+                    $('#displayName').val(displayName);
+                    $('#displayEmail').val(displayEmail);
+                    $('#displayPhone').val(userData.phone || userData.phoneNumber || '');
+                    $('#displayGender').val(userData.gender || '');
+
+                    // Format and display dates
+                    if (userData.createdAt || userData.created_at) {
+                        const createdDate = new Date(userData.createdAt || userData.created_at);
+                        $('#accountCreated').val(createdDate.toLocaleDateString() + ' ' + createdDate.toLocaleTimeString());
+                    } else {
+                        $('#accountCreated').val('Not available');
+                    }
+
+                    if (userData.lastLogin || userData.last_login) {
+                        const lastLoginDate = new Date(userData.lastLogin || userData.last_login);
+                        $('#lastLogin').val(lastLoginDate.toLocaleDateString() + ' ' + lastLoginDate.toLocaleTimeString());
+                    } else {
+                        $('#lastLogin').val('Not available');
+                    }
+
+                    // Animate info items
+                    $('.info-item').each(function(index) {
+                        $(this).css('opacity', '0').delay(index * 100).animate({
+                            opacity: 1
+                        }, 500);
+                    });
+                }, 600);
+            }
+
+            // Add interactive effects
+            $(document).ready(function() {
+                // Add hover effects to cards
+                $('.card').hover(
+                    function() {
+                        $(this).addClass('shadow-lg');
+                    },
+                    function() {
+                        $(this).removeClass('shadow-lg');
+                    }
+                );
+
+                // Add click ripple effect to buttons
+                $('.btn').on('click', function(e) {
+                    const $btn = $(this);
+                    const $ripple = $('<span class="ripple"></span>');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    $ripple.css({
+                        width: size,
+                        height: size,
+                        left: x,
+                        top: y
+                    });
+                    
+                    $btn.append($ripple);
+                    
+                    setTimeout(() => {
+                        $ripple.remove();
+                    }, 600);
+                });
+
+                // Add typing animation to profile name
+                function typeWriter(element, text, speed = 100) {
+                    let i = 0;
+                    element.text('');
+                    function type() {
+                        if (i < text.length) {
+                            element.text(element.text() + text.charAt(i));
+                            i++;
+                            setTimeout(type, speed);
+                        }
+                    }
+                    type();
+                }
+
+                // Animate stats on scroll
+                function animateStats() {
+                    $('.stat-number').each(function() {
+                        const $this = $(this);
+                        const countTo = $this.attr('data-count');
+                        
+                        $({ countNum: $this.text() }).animate({
+                            countNum: countTo
+                        }, {
+                            duration: 2000,
+                            easing: 'swing',
+                            step: function() {
+                                $this.text(Math.floor(this.countNum));
+                            },
+                            complete: function() {
+                                $this.text(this.countNum);
+                            }
+                        });
+                    });
+                }
+
+                // Trigger stats animation when visible
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            animateStats();
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                });
+
+                $('.profile-stats').each(function() {
+                    observer.observe(this);
+                });
+            });
+
+            // Function to handle logout
+            function logout() {
+                // Show confirmation
+                if (confirm('Are you sure you want to logout?')) {
+                    // Send logout request to server
+                    $.ajax({
+                        url: API_BASE_URL + '/users/logout',
+                        type: 'POST',
+                        headers: {
+                            'Authorization': 'Bearer ' + authToken,
+                            'Content-Type': 'application/json'
+                        },
+                        success: function (response) {
+                            // Clear local storage
+                            localStorage.removeItem('authToken');
+                            localStorage.removeItem('refreshToken');
+                            localStorage.removeItem('currentUser');
+
+                            // Redirect to login page
+                            window.location.href = 'index.html';
+                        },
+                        error: function (xhr, status, error) {
+                            // Even if server logout fails, clear local storage
+                            localStorage.removeItem('authToken');
+                            localStorage.removeItem('refreshToken');
+                            localStorage.removeItem('currentUser');
+
+                            // Redirect to login page
+                            window.location.href = 'index.html';
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
